@@ -6,9 +6,9 @@ I take [Murtaza's Youtube page] as reference and it has great tutorials for Open
 To check if OpenCv modules are installed correctly you can run **openCvSetup.py**.  
 Detailed description can be found in project files.
 #### Contents
-Hand Paint (Paint with your finger in your screen) ⭐
--[ ] Hand Dodge Game (Try to escape from scary cube!)
--[x] Hand Volume Control (Computer volume control) ⭐
+- Hand Paint (Paint with your finger in your screen) ⭐
+- Hand Dodge Game (Try to escape from scary cube!)
+- Hand Volume Control (Computer volume control)  ⭐
 
 #### Required libraries
 - [cv2]
@@ -22,7 +22,6 @@ Hand Paint (Paint with your finger in your screen) ⭐
 - [mediapipe]
 
 #### BADGES
-
 [![GitHub issues](https://img.shields.io/github/issues/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/issues) [![GitHub forks](https://img.shields.io/github/forks/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/network) [![GitHub stars](https://img.shields.io/github/stars/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/stargazers) [![GitHub license](https://img.shields.io/github/license/EmirBaran-Ozdemir/OpenCVPython?color=succes&style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/blob/main/LICENSE)  
 [![Twitter](https://img.shields.io/twitter/url?label=Personal-Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2FWileLord)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FEmirBaran-Ozdemir%2FOpenCVPython)
 
