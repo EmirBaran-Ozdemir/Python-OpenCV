@@ -26,7 +26,9 @@ Detailed description can be found in project files.
 [![Twitter](https://img.shields.io/twitter/url?label=Personal-Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2FWileLord)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FEmirBaran-Ozdemir%2FOpenCVPython)
 #### INSTALLATION
 ```sh
+git clone https://github.com/EmirBaran-Ozdemir/OpenCVPython.git
 pip install -r requirements.txt
+python <file_you_want_to_run>
 ```
 [cv2]:<https://pypi.org/project/opencv-python/>
 [numpy]:<https://pypi.org/project/numpy/>
