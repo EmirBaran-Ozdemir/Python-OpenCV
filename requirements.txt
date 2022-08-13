@@ -1,5 +1,5 @@
-pip install opencv-python
-pip install numpy
-pip install comtypes
-pip install pycaw
-pip install mediapipe
+opencv-python
+numpy
+comtypes
+pycaw
+mediapipe
