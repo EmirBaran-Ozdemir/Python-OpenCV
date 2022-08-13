@@ -24,7 +24,10 @@ Detailed description can be found in project files.
 #### BADGES
 [![GitHub issues](https://img.shields.io/github/issues/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/issues) [![GitHub forks](https://img.shields.io/github/forks/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/network) [![GitHub stars](https://img.shields.io/github/stars/EmirBaran-Ozdemir/OpenCVPython?style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/stargazers) [![GitHub license](https://img.shields.io/github/license/EmirBaran-Ozdemir/OpenCVPython?color=succes&style=plastic)](https://github.com/EmirBaran-Ozdemir/OpenCVPython/blob/main/LICENSE)  
 [![Twitter](https://img.shields.io/twitter/url?label=Personal-Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2FWileLord)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FEmirBaran-Ozdemir%2FOpenCVPython)
-
+#### INSTALLATION
+```sh
+pip install -r requirements.txt
+```
 [cv2]:<https://pypi.org/project/opencv-python/>
 [numpy]:<https://pypi.org/project/numpy/>
 [comtypes]:<https://pypi.org/project/comtypes/>
