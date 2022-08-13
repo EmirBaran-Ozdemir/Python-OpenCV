@@ -8,7 +8,7 @@ import math
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-
+ 
 ######################
 wCam, hCam = 1080, 960
 pTime = 0
