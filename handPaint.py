@@ -4,7 +4,7 @@ import time
 import os
 import handTrackingModule as htm
 from collections import deque
- 
+  
 ######################
 wCam, hCam = 1280, 720
 color = (255, 255, 0)
