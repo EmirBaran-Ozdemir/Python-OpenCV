@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 import os
-import HandTrackingModule as htm
+import handTrackingModule as htm
 from collections import deque
 
 ######################
