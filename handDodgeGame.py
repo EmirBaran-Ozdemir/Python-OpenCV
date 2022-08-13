@@ -1,5 +1,5 @@
 import cv2
-import HandTrackingModule as htm
+import handTrackingModule as htm
 import numpy as np
 import time
 
@@ -11,7 +11,7 @@ text = "Game Starting"
 blockSize = 100
 ######################
 
-#Video Capture
+# Video Capture
 cap = cv2.VideoCapture(0)
 cap.set(3, wCam)
 cap.set(4, hCam)
@@ -33,7 +33,7 @@ while True:
         # Game start
         if fingers[0] and fingers[1]:
             start = True
-        # Block moves and game 
+        # Block moves and game
         if start == True:
             if xr < 1000 and yr < 1000:
                 xr += 10
