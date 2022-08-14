@@ -74,7 +74,7 @@ detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackC
 
 while True:
     success, img = camera.read()
-    img = detector.findHands(img, draw=True)
+    img = detector.findHands(img, draw=False)
     lmList, bbox = detector.findPosition(img, draw=False)
     start = False
 
