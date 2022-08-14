@@ -7,7 +7,7 @@ To check if OpenCv modules are installed correctly you can run **openCvSetup.py*
 Detailed description can be found in project files.
 #### Contents
 - Hand Paint (Paint with your finger in your screen) ⭐
-- Hand Dodge Game (Try to escape from scary cube!)
+- Hand Dodge Game (Try to escape from scary cube!) ⭐
 - Hand Volume Control (Computer volume control)  ⭐
 
 #### Required libraries
