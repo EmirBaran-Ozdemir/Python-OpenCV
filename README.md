@@ -9,6 +9,7 @@ Detailed description can be found in project files.
 - Hand Paint (Paint with your finger in your screen) ⭐
 - Hand Dodge Game (Try to escape from scary cube!) ⭐
 - Hand Volume Control (Computer volume control)  ⭐
+- Camera Multiplication (Just try)
 
 #### Required libraries
 - [cv2]
