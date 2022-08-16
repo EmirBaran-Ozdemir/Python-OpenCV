@@ -37,4 +37,4 @@ python <file_you_want_to_run>
 [pycaw]:<https://pypi.org/project/pycaw/>
 [mediapipe]:<https://pypi.org/project/mediapipe/>
 [This Project]: <https://github.com/EmirBaran-Ozdemir/OpenCVPython>
-[Murtaza's Youtube page]:(https://www.youtube.com/c/MurtazasWorkshopRoboticsandAI)
+[Murtaza's Youtube page]:<https://www.youtube.com/c/MurtazasWorkshopRoboticsandAI>
