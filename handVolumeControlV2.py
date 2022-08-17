@@ -8,7 +8,7 @@ import math
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
- 
+
 ######################
 wCam, hCam = 1080, 960
 pTime = 0
@@ -67,6 +67,6 @@ while True:
         img, f"FPS:{int(fps)}", (10, 440), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2
     )
     # DISPLAY
-    cv2.imshow("Windw", img)
+    cv2.imshow("Hand Volume Control", img)
     if cv2.waitKey(1) == ord("q"):
         break

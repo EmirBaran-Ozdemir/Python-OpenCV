@@ -1,10 +1,11 @@
+# TechVidvan Object detection of similar color
 import cv2
 import numpy as np
-import time
 import os
 import handTrackingModule as htm
-from collections import deque
 
+
+# VARIABLES
 ######################
 wCam, hCam = 1280, 720
 color = (255, 255, 0)
@@ -14,13 +15,13 @@ xp, yp = 0, 0
 pTime = 0
 cTime = 0
 ######################
-# FOTO FOLDER
-folderPath = "assets"
+# Reading the images
+folderPath = "assets\\assetsHandPoseChallenge"
 myList = os.listdir(folderPath)
 overlayList = []
 for imgPath in myList:
-    image = cv2.imread(f"{folderPath}/{imgPath}")
-    overlayList.append(image)
+    img = cv2.imread(f"{folderPath}/{imgPath}")
+    overlayList.append(img)
 
 # DETECTOR
 detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9)
@@ -29,8 +30,9 @@ cap = cv2.VideoCapture(0)
 cap.set(3, wCam)
 cap.set(4, hCam)
 imgCanvas = np.zeros((720, 1280, 3), np.uint8)
-xp, yp = 0, 0
+
 while True:
+
     succes, img = cap.read()
     # FLIP
     img = cv2.flip(img, 1)
@@ -96,11 +98,6 @@ while True:
         else:
             xp, yp = 0, 0
 
-    imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
-    _, imgInv = cv2.threshold(imgGray, 50, 255, cv2.THRESH_BINARY_INV)
-    imgInv = cv2.cvtColor(imgInv, cv2.COLOR_GRAY2BGR)
-    img = cv2.bitwise_and(img, imgInv)
-    img = cv2.bitwise_or(img, imgCanvas)
     # FRAME RATE
     cTime = time.time()
     fps = 1 / (cTime - pTime)
@@ -111,7 +108,7 @@ while True:
     )
     # DISPLAY
     # img = cv2.addWeighted(img, 0.5, imgCanvas, 0.5, 0)
-    cv2.imshow("handPaint", img)
+    cv2.imshow("Hand Poses Challenge", img)
     # cv2.imshow("canvas",imgCanvas)
     if cv2.waitKey(1) == ord("q"):
         break

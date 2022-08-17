@@ -1,25 +1,30 @@
-# TechVidvan Object detection of similar color
 import cv2
-import numpy as np
-import os
+import time
 
-# Reading the image
-folderPath = "assets"
-myList = os.listdir(folderPath)
-overlayList = []
-for imgPath in myList:
-    img = cv2.imread(f"{folderPath}/{imgPath}")
-    overlayList.append(img)
+######################
+wCam, hCam = 1500, 1200
+######################
 
+cap = cv2.VideoCapture(0)
+cap.set(3, wCam)
+cap.set(4, hCam)
+pTime = 0
+# detector = htm.handDetector(maxHands=1)
 
-# convert to hsv colorspace
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-# lower bound and upper bound for Green color
-lower_bound = np.array([50, 20, 20])
-upper_bound = np.array([100, 255, 255])
-# find the colors within the boundaries
-mask = cv2.inRange(hsv, lower_bound, upper_bound)
-# Showing the output
-cv2.imshow("Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+while True:
+     success, img = cap.read()
+     # img = detector.findHands(img)
+     # lmList, bbox = detector.findPosition(img)
+     
+     #FRAME RATE
+     cTime = time.time()
+     fps = 1 / (cTime - pTime)
+     pTime = cTime
+     
+
+     #DISPLAY
+     img = cv2.flip(img, 1)
+     cv2.putText(img, f'FPS:{int(fps)}', (20, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+     cv2.imshow("Test", img)
+     if cv2.waitKey(1) == ord("q"):
+          break

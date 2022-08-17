@@ -251,7 +251,7 @@ while True:
         (0, 255, 0),
         2,
     )
-    cv2.imshow("Test", img)
+    cv2.imshow("Hand Dodge Game", img)
     # EXIT
     if cv2.waitKey(1) == ord("q"):
         break
