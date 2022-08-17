@@ -14,7 +14,7 @@ xp, yp = 0, 0
 pTime = 0
 cTime = 0
 ######################
-# PHOTO FOLDER
+# FOTO FOLDER
 folderPath = "assets"
 myList = os.listdir(folderPath)
 overlayList = []
