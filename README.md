@@ -18,6 +18,7 @@ Detailed description can be found in project files.
 - math -- *Default Python library*
 - ctypes -- *Default Python library*
 - collections -- *Default Python library*
+- random -- *Default Python library*
 - [comtypes]
 - [pycaw]
 - [mediapipe]
