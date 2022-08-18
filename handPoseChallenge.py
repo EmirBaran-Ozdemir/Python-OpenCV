@@ -14,8 +14,6 @@ def main():
     # VARIABLES
     ######################
     wCam, hCam = 1280, 720
-    color = (255, 255, 0)
-    brushTickness = 10
     xp, yp = 0, 0
     pTime = 0
     cTime = 0
@@ -39,7 +37,6 @@ def main():
     imgCanvas = np.zeros((hCam, wCam, 3), np.uint8)
 
     while True:
-
         succes, img = cap.read()
         # FLIP
         img = cv2.flip(img, 1)
@@ -52,12 +49,25 @@ def main():
             x1, y1 = lmList[8][1], lmList[8][2]
             x2, y2 = lmList[12][1], lmList[12][2]
             fingers = detector.fingersUp(img=img, draw=False)
+            #If pose not true
             if not correctPose:
-                if fingers[1]:
-                    img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = header
+                if choosePicture(1):
+                    if (not fingers[0] 
+                    and fingers[1] 
+                    and fingers[2] 
+                    and fingers[3] 
+                    and fingers[4]):
+                        correctPose = True
+            #If user poses true
             else:
-                if not fingers[0] and not fingers[1] and not fingers[2] and not fingers[3] and not fingers[4]:
+                if (fingers[0] 
+                and not fingers[1] 
+                and not fingers[2] 
+                and not fingers[3] 
+                and not fingers[4]):
                     header = choosePicture(overlayList)
+                    img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = header
+                    correctPose =  False
                 
                     
             
