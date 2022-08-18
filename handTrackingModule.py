@@ -63,7 +63,7 @@ class handDetector:
                     2,
                 )
         return self.lmList, bbox
- 
+
     def fingersUp(self, img, draw=True):
         fingers = []
         self.tipIds = [4, 8, 12, 16, 20]

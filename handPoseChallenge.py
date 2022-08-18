@@ -8,15 +8,145 @@ import random
 
 def choosePicture(overlayList):
     randomInteger = random.randint(0, len(overlayList) - 1)
-    return overlayList[randomInteger]
+    return overlayList[randomInteger], randomInteger
+
+
+def comparePoses(poseIndex, fingers):
+    # All fingers open
+    if poseIndex == 0:
+        if fingers[0] and fingers[1] and fingers[2] and fingers[3] and fingers[4]:
+            correctPose = True
+            return correctPose
+    # Index and middle finger open
+    if poseIndex == 1:
+        if (
+            not fingers[0]
+            and fingers[1]
+            and fingers[2]
+            and not fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Index finger open
+    if poseIndex == 2:
+        if (
+            not fingers[0]
+            and fingers[1]
+            and not fingers[2]
+            and not fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Little finger open
+    if poseIndex == 3:
+        if (
+            not fingers[0]
+            and not fingers[1]
+            and not fingers[2]
+            and not fingers[3]
+            and fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Little and ring finger closed
+    if poseIndex == 4:
+        if (
+            fingers[0]
+            and fingers[1]
+            and fingers[2]
+            and not fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb closed
+    if poseIndex == 5:
+        if (
+            fingers[0]
+            and not fingers[1]
+            and not fingers[2]
+            and not fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb and index finger closed
+    if poseIndex == 6:
+        if (
+            not fingers[0]
+            and not fingers[1]
+            and fingers[2]
+            and fingers[3]
+            and fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb and little finger closed
+    if poseIndex == 7:
+        if (
+            not fingers[0]
+            and fingers[1]
+            and fingers[2]
+            and fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb and little finger open
+    if poseIndex == 8:
+        if (
+            fingers[0]
+            and not fingers[1]
+            and not fingers[2]
+            and not fingers[3]
+            and fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb and middle finger closed
+    if poseIndex == 9:
+        if (
+            not fingers[0]
+            and fingers[1]
+            and not fingers[2]
+            and fingers[3]
+            and fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb open
+    if poseIndex == 10:
+        if (
+            fingers[0]
+            and not fingers[1]
+            and not fingers[2]
+            and not fingers[3]
+            and not fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+    # Thumb and ring finger open
+    if poseIndex == 11:
+        if (
+            not fingers[0]
+            and fingers[1]
+            and fingers[2]
+            and not fingers[3]
+            and fingers[4]
+        ):
+            correctPose = True
+            return correctPose
+
 
 def main():
     # VARIABLES
     ######################
     wCam, hCam = 1280, 720
-    xp, yp = 0, 0
     pTime = 0
     cTime = 0
+    correctPose = True
     ######################
     # Reading the images
     folderPath = "assets\\assetsHandPoseChallenge"
@@ -41,36 +171,27 @@ def main():
         # FLIP
         img = cv2.flip(img, 1)
         # HAND FIND
-        img = detector.findHands(img, draw=False)
-        lmList, bbox = detector.findPosition(img, draw=False)
+        img = detector.findHands(img=img, draw=False)
+        lmList, bbox = detector.findPosition(img=img, draw=False)
 
         if len(lmList) != 0:
             # FINGER INDEXES
-            x1, y1 = lmList[8][1], lmList[8][2]
-            x2, y2 = lmList[12][1], lmList[12][2]
-            fingers = detector.fingersUp(img=img, draw=False)
-            #If pose not true
+            fingers = detector.fingersUp(img=img, draw=True)
+            # If users pose incorrect
             if not correctPose:
-                if choosePicture(1):
-                    if (not fingers[0] 
-                    and fingers[1] 
-                    and fingers[2] 
-                    and fingers[3] 
-                    and fingers[4]):
-                        correctPose = True
-            #If user poses true
+                img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = posePicture
+                correctPose = comparePoses(poseIndex, fingers)
+            # New pose if users pose correct or
             else:
-                if (fingers[0] 
-                and not fingers[1] 
-                and not fingers[2] 
-                and not fingers[3] 
-                and not fingers[4]):
-                    header = choosePicture(overlayList)
-                    img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = header
-                    correctPose =  False
-                
-                    
-            
+                if (
+                    not fingers[0]
+                    and not fingers[1]
+                    and not fingers[2]
+                    and not fingers[3]
+                    and not fingers[4]
+                ):
+                    posePicture, poseIndex = choosePicture(overlayList)
+                    correctPose = False
 
         # FRAME RATE
         cTime = time.time()
@@ -87,9 +208,7 @@ def main():
             2,
         )
         # DISPLAY
-
         cv2.imshow("Hand Poses Challenge", img)
-
         if cv2.waitKey(1) == ord("q"):
             break
 
