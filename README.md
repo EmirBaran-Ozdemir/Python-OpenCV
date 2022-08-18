@@ -10,6 +10,7 @@ Detailed description can be found in project files.
 - Hand Dodge Game (Try to escape from scary cube!) ⭐
 - Hand Volume Control (Computer volume control)  ⭐
 - Camera Multiplication (Just try)
+- Hand Pose Challenge (You should do the same pose as shown) ⭐  
 
 #### Required libraries
 - [cv2]
