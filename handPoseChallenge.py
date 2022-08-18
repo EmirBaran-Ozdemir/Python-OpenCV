@@ -63,13 +63,7 @@ def comparePoses(poseIndex, fingers):
             return correctPose
     # Thumb closed
     if poseIndex == 5:
-        if (
-            fingers[0]
-            and not fingers[1]
-            and not fingers[2]
-            and not fingers[3]
-            and not fingers[4]
-        ):
+        if not fingers[0] and fingers[1] and fingers[2] and fingers[3] and fingers[4]:
             correctPose = True
             return correctPose
     # Thumb and index finger closed
