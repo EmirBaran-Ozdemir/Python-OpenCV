@@ -7,8 +7,7 @@ import random
 
 
 def choosePicture(overlayList):
-    randomInteger = random.randint(0, len(overlayList)-1)
-    print(len(overlayList))
+    randomInteger = random.randint(0, len(overlayList) - 1)
     return overlayList[randomInteger]
 
 def main():
@@ -17,7 +16,6 @@ def main():
     wCam, hCam = 1280, 720
     color = (255, 255, 0)
     brushTickness = 10
-
     xp, yp = 0, 0
     pTime = 0
     cTime = 0
@@ -31,7 +29,9 @@ def main():
         overlayList.append(img)
 
     # DETECTOR
-    detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9)
+    detector = htm.handDetector(
+        modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9
+    )
     # VIDEO CAPTURE
     cap = cv2.VideoCapture(0)
     cap.set(3, wCam)
@@ -52,9 +52,15 @@ def main():
             x1, y1 = lmList[8][1], lmList[8][2]
             x2, y2 = lmList[12][1], lmList[12][2]
             fingers = detector.fingersUp(img=img, draw=False)
-            if fingers[1]:
-                header = choosePicture(overlayList)
-                img[29:100,int(wCam/2-35.5):int(wCam/2+35.5)] = header 
+            if not correctPose:
+                if fingers[1]:
+                    img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = header
+            else:
+                if not fingers[0] and not fingers[1] and not fingers[2] and not fingers[3] and not fingers[4]:
+                    header = choosePicture(overlayList)
+                
+                    
+            
 
         # FRAME RATE
         cTime = time.time()
@@ -62,14 +68,21 @@ def main():
         pTime = cTime
         # FPS COUNTER
         cv2.putText(
-            img, f"FPS:{int(fps)}", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2
+            img,
+            f"FPS:{int(fps)}",
+            (10, 110),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            2,
+            (0, 255, 0),
+            2,
         )
         # DISPLAY
-        # img = cv2.addWeighted(img, 0.5, imgCanvas, 0.5, 0)
+
         cv2.imshow("Hand Poses Challenge", img)
-        # cv2.imshow("canvas",imgCanvas)
+
         if cv2.waitKey(1) == ord("q"):
             break
+
 
 if __name__ == "__main__":
     main()
