@@ -16,7 +16,7 @@ pTime = 0
 cTime = 0
 ######################
 # PHOTO FOLDER
-folderPath = "assets"
+folderPath = "assets\\assetsHandPaint"
 myList = os.listdir(folderPath)
 overlayList = []
 for imgPath in myList:
@@ -44,15 +44,15 @@ while True:
         # FINGER INDEXES
         x1, y1 = lmList[8][1], lmList[8][2]
         x2, y2 = lmList[12][1], lmList[12][2]
-
         fingers = detector.fingersUp(img=img, draw=False)
+        # If little finger and thumb is closed board activates
         if not fingers[0] and not fingers[4]:
-            if fingers[3] and fingers[2] and fingers[1]:
-                # FOTOS
+            if fingers[1] and fingers[2] and fingers[3]:
+                # PHOTO SET
                 header = np.concatenate(
                     (overlayList[0], overlayList[2], overlayList[3]), axis=1
                 )
-                # FOTO
+                # PLACING PHOTOS
                 img[0:150, 640 - 225 : 640 + 225] = header
                 if y2 < 155:
                     if 415 < x2 < 565:
@@ -62,7 +62,7 @@ while True:
                     elif 715 < x2 < 865:
                         color = (0, 0, 255)
                 xp, yp = 0, 0
-            elif fingers[2] and fingers[1] and not fingers[3]:
+            elif fingers[1] and fingers[2] and not fingers[3]:
                 cv2.rectangle(
                     img, (x1, y1 + 30), (x2, y1 - 20), (255, 255, 255), cv2.FILLED
                 )
@@ -71,7 +71,7 @@ while True:
                 if xp == 0 and yp == 0:
                     xp, yp = x1, y1
                 img[0:150, 640 - 75 : 640 + 75] = header
-                # cv2.line(img, (xp,yp), (x1,y1), (0,0,0), eraserTickness)
+                
                 cv2.rectangle(
                     imgCanvas, (x1, y1 + 30), (x2, y1 - 20), (0, 0, 0), cv2.FILLED
                 )
@@ -88,14 +88,15 @@ while True:
 
                 if xp == 0 and yp == 0:
                     xp, yp = x1, y1
-                # f1 = x1-xp #1 = 105-104 -- 105-1 = 104
-
+                
                 cv2.line(img, (xp, yp), (x1, y1), color, brushTickness)
 
                 cv2.line(imgCanvas, (xp, yp), (x1, y1), color, brushTickness)
                 xp, yp = x1, y1
+            xp, yp = x1, y1
         else:
-            xp, yp = 0, 0
+            xp, yp = x1, y1
+    
 
     imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
     _, imgInv = cv2.threshold(imgGray, 50, 255, cv2.THRESH_BINARY_INV)
@@ -108,7 +109,7 @@ while True:
     pTime = cTime
     # FPS COUNTER
     cv2.putText(
-        img, f"FPS:{int(fps)}", (10, 440), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2
+        img, f"FPS:{int(fps)}", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2
     )
     # DISPLAY
     # img = cv2.addWeighted(img, 0.5, imgCanvas, 0.5, 0)
