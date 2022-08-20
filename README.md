@@ -20,6 +20,7 @@ Detailed description can be found in project files.
 - ctypes -- *Default Python library*
 - collections -- *Default Python library*
 - random -- *Default Python library*
+- sys -- *Default Python library*
 - [comtypes]
 - [pycaw]
 - [mediapipe]
