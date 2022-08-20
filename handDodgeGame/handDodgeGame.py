@@ -1,5 +1,9 @@
+import sys
+
+sys.path.append("../")
+
 import cv2
-import handTrackingModule as htm
+from OpencvPythonLessons.HTM import handTrackingModule as htm
 import numpy as np
 import time
 
@@ -15,7 +19,6 @@ whiteColor, blackColor, redColor, greenColor, blueColor = (
     (0, 255, 0),
     (0, 0, 255),
 )
-
 chooseDifficulty = False
 playerLose = False
 score = 0
@@ -70,8 +73,6 @@ pTime = 0
 detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9)
 
 # Set difficulty variables
-
-
 while True:
     success, img = camera.read()
     img = detector.findHands(img, draw=False)

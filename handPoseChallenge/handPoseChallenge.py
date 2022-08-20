@@ -1,7 +1,10 @@
+import sys
+
+sys.path.append("../")
 import cv2
 import numpy as np
 import os
-import handTrackingModule as htm
+from OpencvPythonLessons.HTM import handTrackingModule as htm
 import time
 import random
 
@@ -196,9 +199,7 @@ def main():
                 )
                 # Pose display and user pose check if new pose generated
                 if not correctPose:
-                    img[
-                        29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)
-                    ] = posePicture
+                    img[29:129, int(wCam / 2 - 50) : int(wCam / 2 + 50)] = posePicture
                     correctPose = comparePoses(poseIndex, fingers)
                 # Generate new pose if users pose correct or this is first raund
                 else:

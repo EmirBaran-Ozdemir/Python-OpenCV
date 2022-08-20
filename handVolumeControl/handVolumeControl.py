@@ -1,8 +1,10 @@
+import sys
+
+sys.path.append("../")
 import cv2
 import numpy as np
-import sys
 import os
-import handTrackingModule as htm
+from OpencvPythonLessons.HTM import handTrackingModule as htm
 import time
 import math
 from ctypes import cast, POINTER
@@ -17,7 +19,6 @@ volBar = 400
 volPer = 0
 area = 0
 ######################
-
 # PYCAW TEMPLATE
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)

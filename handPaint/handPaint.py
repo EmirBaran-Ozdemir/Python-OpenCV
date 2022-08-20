@@ -1,8 +1,11 @@
+import sys
+
+sys.path.append("../")
 import cv2
 import numpy as np
 import time
 import os
-import handTrackingModule as htm
+from OpencvPythonLessons.HTM import handTrackingModule as htm
 from collections import deque
 
 # VARIABLES
@@ -10,7 +13,7 @@ from collections import deque
 wCam, hCam = 1280, 720
 color = (255, 255, 0)
 brushTickness = 10
-
+x1, y1 = 0, 0
 xp, yp = 0, 0
 pTime = 0
 cTime = 0
@@ -30,7 +33,6 @@ cap = cv2.VideoCapture(0)
 cap.set(3, wCam)
 cap.set(4, hCam)
 imgCanvas = np.zeros((720, 1280, 3), np.uint8)
-xp, yp = 0, 0
 while True:
     succes, img = cap.read()
     # FLIP
@@ -66,16 +68,15 @@ while True:
                 cv2.rectangle(
                     img, (x1, y1 + 30), (x2, y1 - 20), (255, 255, 255), cv2.FILLED
                 )
-                xp, yp = 0, 0
+
                 header = overlayList[1]
-                if xp == 0 and yp == 0:
-                    xp, yp = x1, y1
+                xp, yp = 0, 0
                 img[0:150, 640 - 75 : 640 + 75] = header
-                
+
                 cv2.rectangle(
                     imgCanvas, (x1, y1 + 30), (x2, y1 - 20), (0, 0, 0), cv2.FILLED
                 )
-            elif fingers[1] and not fingers[3]:
+            elif fingers[1] and not fingers[2] and not fingers[3]:
 
                 if color == (255, 255, 0):  # BLUE
                     header = overlayList[0]
@@ -88,15 +89,12 @@ while True:
 
                 if xp == 0 and yp == 0:
                     xp, yp = x1, y1
-                
                 cv2.line(img, (xp, yp), (x1, y1), color, brushTickness)
 
                 cv2.line(imgCanvas, (xp, yp), (x1, y1), color, brushTickness)
                 xp, yp = x1, y1
-            xp, yp = x1, y1
-        else:
-            xp, yp = x1, y1
-    
+    else:
+        xp, yp = 0, 0
 
     imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
     _, imgInv = cv2.threshold(imgGray, 50, 255, cv2.THRESH_BINARY_INV)
