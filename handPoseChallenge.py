@@ -177,7 +177,7 @@ def main():
         img = cv2.flip(img, 1)
         # Adding detected hands to the img
         img = detector.findHands(img=img, draw=False)
-        lmList, _ = detector.findPosition(img=img, draw=True)
+        lmList, _ = detector.findPosition(img=img, draw=False)
         # Game continues while raund greater than zero
         if raund > 0:
             cv2.putText(
@@ -191,7 +191,9 @@ def main():
             )
             if len(lmList) != 0:
                 # Define finger indexes
-                fingers = detector.fingersUp(img=img, draw=False)
+                fingers = detector.fingersUp(
+                    img=img, draw=False, circleRadius=10, circleColor=(0, 0, 0)
+                )
                 # Pose display and user pose check if new pose generated
                 if not correctPose:
                     img[
@@ -234,17 +236,17 @@ def main():
             cv2.putText(
                 img,
                 f"Game Over",
-                (int(wCam / 2 - 250), int(hCam / 2 - 20)),
+                (int(wCam / 2 - 300), int(hCam / 2 - 40)),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                2,
-                (0, 0, 255),
                 3,
+                (0, 0, 255),
+                5,
             )
             # SCORE DISPLAY
             cv2.putText(
                 img,
                 f"Total Score:{score}",
-                (int(wCam / 2 - 225), int(hCam / 2 + 20)),
+                (int(wCam / 2 - 200), int(hCam / 2 + 20)),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 1,
                 (0, 0, 255),

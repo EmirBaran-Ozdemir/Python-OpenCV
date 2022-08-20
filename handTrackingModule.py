@@ -64,7 +64,7 @@ class handDetector:
                 )
         return self.lmList, bbox
 
-    def fingersUp(self, img, draw=True):
+    def fingersUp(self, img, draw=True, circleRadius=15, circleColor=(0, 255, 0)):
         fingers = []
         self.tipIds = [4, 8, 12, 16, 20]
         # THUMB
@@ -74,8 +74,8 @@ class handDetector:
                 cv2.circle(
                     img,
                     (self.lmList[self.tipIds[0]][1], self.lmList[self.tipIds[0]][2]),
-                    15,
-                    (0, 255, 0),
+                    circleRadius,
+                    circleColor,
                     cv2.FILLED,
                 )
         else:
@@ -91,8 +91,8 @@ class handDetector:
                             self.lmList[self.tipIds[id]][1],
                             self.lmList[self.tipIds[id]][2],
                         ),
-                        15,
-                        (0, 255, 0),
+                        circleRadius,
+                        circleColor,
                         cv2.FILLED,
                     )
             else:
