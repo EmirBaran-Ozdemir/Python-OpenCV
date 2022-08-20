@@ -11,6 +11,14 @@ def choosePicture(overlayList):
     return overlayList[randomInteger], randomInteger
 
 
+def calculateScore(score):
+    if score == 0:
+        return score
+    else:
+        score -= 10
+        return score
+
+
 def comparePoses(poseIndex, fingers):
     # All fingers open
     if poseIndex == 0:
@@ -141,6 +149,9 @@ def main():
     pTime = 0
     cTime = 0
     correctPose = True
+    maxScore = 200
+    score = 0
+    start = True
     ######################
     # Reading the images
     folderPath = "assets\\assetsHandPoseChallenge"
@@ -175,6 +186,7 @@ def main():
             if not correctPose:
                 img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = posePicture
                 correctPose = comparePoses(poseIndex, fingers)
+
             # New pose if users pose correct or
             else:
                 if (
@@ -186,7 +198,22 @@ def main():
                 ):
                     posePicture, poseIndex = choosePicture(overlayList)
                     correctPose = False
-
+                    start = True
+            if start:
+                maxScore == calculateScore(maxScore)
+                if correctPose:
+                    score += maxScore
+                    start == False
+        # SCORE DISPLAY
+        cv2.putText(
+            img,
+            f"Score:{score}",
+            (10, 210),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            2,
+            (0, 255, 0),
+            2,
+        )
         # FRAME RATE
         cTime = time.time()
         fps = 1 / (cTime - pTime)
