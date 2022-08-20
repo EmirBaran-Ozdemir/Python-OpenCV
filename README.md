@@ -10,6 +10,7 @@ Detailed description can be found in project files.
 - Hand Dodge Game (Try to escape from scary cube!) ⭐
 - Hand Volume Control (Computer volume control)  ⭐
 - Camera Multiplication (Just try)
+- Hand Pose Challenge (You should do the same pose as shown) ⭐  
 
 #### Required libraries
 - [cv2]
@@ -18,6 +19,7 @@ Detailed description can be found in project files.
 - math -- *Default Python library*
 - ctypes -- *Default Python library*
 - collections -- *Default Python library*
+- random -- *Default Python library*
 - [comtypes]
 - [pycaw]
 - [mediapipe]
