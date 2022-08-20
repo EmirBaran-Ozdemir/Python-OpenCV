@@ -11,12 +11,12 @@ def choosePicture(overlayList):
     return overlayList[randomInteger], randomInteger
 
 
-def calculateScore(score):
-    if score == 0:
-        return score
+def calculateScore(maxScore):
+    if maxScore == 0:
+        return maxScore
     else:
-        score -= 10
-        return score
+        maxScore -= 10
+        return maxScore
 
 
 def comparePoses(poseIndex, fingers):
@@ -149,9 +149,10 @@ def main():
     pTime = 0
     cTime = 0
     correctPose = True
-    maxScore = 200
+    maxScore = 2000
     score = 0
-    start = True
+    start = False
+    raund = 10
     ######################
     # Reading the images
     folderPath = "assets\\assetsHandPoseChallenge"
@@ -161,59 +162,94 @@ def main():
         img = cv2.imread(f"{folderPath}/{imgPath}")
         overlayList.append(img)
 
-    # DETECTOR
+    # Hand detection
     detector = htm.handDetector(
         modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9
     )
-    # VIDEO CAPTURE
+    # Video capture and set display
     cap = cv2.VideoCapture(0)
     cap.set(3, wCam)
     cap.set(4, hCam)
-    imgCanvas = np.zeros((hCam, wCam, 3), np.uint8)
 
     while True:
         succes, img = cap.read()
-        # FLIP
+        # Flip and correct camera
         img = cv2.flip(img, 1)
-        # HAND FIND
+        # Adding detected hands to the img
         img = detector.findHands(img=img, draw=False)
-        lmList, bbox = detector.findPosition(img=img, draw=False)
+        lmList, _ = detector.findPosition(img=img, draw=True)
+        # Game continues while raund greater than zero
+        if raund > 0:
+            cv2.putText(
+                img,
+                f"Raund left {raund}",
+                (10, 100),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 255, 0),
+                2,
+            )
+            if len(lmList) != 0:
+                # Define finger indexes
+                fingers = detector.fingersUp(img=img, draw=False)
+                # Pose display and user pose check if new pose generated
+                if not correctPose:
+                    img[
+                        29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)
+                    ] = posePicture
+                    correctPose = comparePoses(poseIndex, fingers)
+                # Generate new pose if users pose correct or this is first raund
+                else:
+                    if (
+                        not fingers[0]
+                        and not fingers[1]
+                        and not fingers[2]
+                        and not fingers[3]
+                        and not fingers[4]
+                    ):
+                        posePicture, poseIndex = choosePicture(overlayList)
+                        correctPose = False
+                        start = True
+                        raund -= 1
+                # If pose generated timer starts
+                if start:
+                    maxScore = calculateScore(maxScore)
+                    # Current pose score
+                    cv2.putText(
+                        img,
+                        f"Pose Score:{maxScore}",
+                        (10, 150),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1,
+                        (0, 255, 0),
+                        2,
+                    )
+                    # Calculate score if user poses correctly
+                    if correctPose:
+                        score += maxScore
+                        start = False
+                        maxScore = 2000
 
-        if len(lmList) != 0:
-            # FINGER INDEXES
-            fingers = detector.fingersUp(img=img, draw=True)
-            # If users pose incorrect
-            if not correctPose:
-                img[29:100, int(wCam / 2 - 35.5) : int(wCam / 2 + 35.5)] = posePicture
-                correctPose = comparePoses(poseIndex, fingers)
-
-            # New pose if users pose correct or
-            else:
-                if (
-                    not fingers[0]
-                    and not fingers[1]
-                    and not fingers[2]
-                    and not fingers[3]
-                    and not fingers[4]
-                ):
-                    posePicture, poseIndex = choosePicture(overlayList)
-                    correctPose = False
-                    start = True
-            if start:
-                maxScore == calculateScore(maxScore)
-                if correctPose:
-                    score += maxScore
-                    start == False
-        # SCORE DISPLAY
-        cv2.putText(
-            img,
-            f"Score:{score}",
-            (10, 210),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            2,
-            (0, 255, 0),
-            2,
-        )
+        else:
+            cv2.putText(
+                img,
+                f"Game Over",
+                (int(wCam / 2 - 250), int(hCam / 2 - 20)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                2,
+                (0, 0, 255),
+                3,
+            )
+            # SCORE DISPLAY
+            cv2.putText(
+                img,
+                f"Total Score:{score}",
+                (int(wCam / 2 - 225), int(hCam / 2 + 20)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (0, 0, 255),
+                2,
+            )
         # FRAME RATE
         cTime = time.time()
         fps = 1 / (cTime - pTime)
@@ -222,10 +258,10 @@ def main():
         cv2.putText(
             img,
             f"FPS:{int(fps)}",
-            (10, 110),
+            (1150, 50),
             cv2.FONT_HERSHEY_SIMPLEX,
-            2,
-            (0, 255, 0),
+            0.8,
+            (0, 0, 0),
             2,
         )
         # DISPLAY
