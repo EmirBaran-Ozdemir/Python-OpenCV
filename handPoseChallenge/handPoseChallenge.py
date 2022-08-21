@@ -10,7 +10,7 @@ import random
 
 
 def choosePicture(overlayList):
-    randomInteger = random.randint(0, len(overlayList) - 1)
+    randomInteger = random.randint(0, len(overlayList) - 2)
     return overlayList[randomInteger], randomInteger
 
 
@@ -232,7 +232,17 @@ def main():
                         score += maxScore
                         start = False
                         maxScore = 2000
-
+                else:
+                    cv2.putText(
+                        img,
+                        f"To Start Raund:",
+                        (10, 150),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1,
+                        (0, 255, 0),
+                        2,
+                    )
+                    img[180:280, 10:110] = overlayList[len(overlayList) - 1]
         else:
             cv2.putText(
                 img,
