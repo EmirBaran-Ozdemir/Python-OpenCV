@@ -2,8 +2,8 @@
 ### General Description
 [This project] is made for fun and learning OpenCV for Python.  
 I take [Murtaza's Youtube page] as reference and it has great tutorials for OpenCV and robotics.   
-[This project] includes fun games and projects that you can try and improve.    
-To check if OpenCv modules are installed correctly you can run **openCvSetup.py**.  
+[This project] includes fun games and projects that you can try and improve yourself.    
+To check if OpenCv modules are installed correctly you can run **cameraINIT.py**.  
 Detailed description can be found in project files.
 #### Contents
 - Hand Paint (Paint with your finger in your screen) ⭐
@@ -20,6 +20,7 @@ Detailed description can be found in project files.
 - ctypes -- *Default Python library*
 - collections -- *Default Python library*
 - random -- *Default Python library*
+- sys -- *Default Python library*
 - [comtypes]
 - [pycaw]
 - [mediapipe]
