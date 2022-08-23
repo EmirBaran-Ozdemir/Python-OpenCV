@@ -2,8 +2,8 @@
 ### General Description
 [This project] is made for fun and learning OpenCV for Python.  
 I take [Murtaza's Youtube page] as reference and it has great tutorials for OpenCV and robotics.   
-[This project] includes fun games and projects that you can try and improve yourself.    
-To check if OpenCv modules are installed correctly you can run **cameraINIT.py**.  
+[This project] includes fun games and projects that you can try and improve.    
+To check if OpenCv modules are installed correctly you can run **openCvSetup.py**.  
 Detailed description can be found in project files.
 #### Contents
 - Hand Paint (Paint with your finger in your screen) ⭐
@@ -17,12 +17,7 @@ Detailed description can be found in project files.
 - [numpy]
 - time -- *Default Python library*
 - math -- *Default Python library*
-- ctypes -- *Default Python library*
-- collections -- *Default Python library*
 - random -- *Default Python library*
-- sys -- *Default Python library*
-- [comtypes]
-- [pycaw]
 - [mediapipe]
 
 #### BADGES
@@ -32,12 +27,9 @@ Detailed description can be found in project files.
 ```sh
 git clone https://github.com/EmirBaran-Ozdemir/OpenCVPython.git
 pip install -r requirements.txt
-python <file_you_want_to_run>
 ```
 [cv2]:<https://pypi.org/project/opencv-python/>
 [numpy]:<https://pypi.org/project/numpy/>
-[comtypes]:<https://pypi.org/project/comtypes/>
-[pycaw]:<https://pypi.org/project/pycaw/>
 [mediapipe]:<https://pypi.org/project/mediapipe/>
 [This Project]: <https://github.com/EmirBaran-Ozdemir/OpenCVPython>
 [Murtaza's Youtube page]:<https://www.youtube.com/c/MurtazasWorkshopRoboticsandAI>
