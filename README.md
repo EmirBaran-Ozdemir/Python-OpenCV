@@ -27,7 +27,6 @@ Detailed description can be found in project files.
 ```sh
 git clone https://github.com/EmirBaran-Ozdemir/OpenCVPython.git
 pip install -r requirements.txt
-python <file_you_want_to_run>
 ```
 [cv2]:<https://pypi.org/project/opencv-python/>
 [numpy]:<https://pypi.org/project/numpy/>
