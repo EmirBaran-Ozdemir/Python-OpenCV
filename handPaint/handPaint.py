@@ -93,6 +93,10 @@ while True:
 
                 cv2.line(imgCanvas, (xp, yp), (x1, y1), color, brushTickness)
                 xp, yp = x1, y1
+            else:
+                xp, yp = 0, 0
+        else:
+            xp, yp = 0, 0
     else:
         xp, yp = 0, 0
 
