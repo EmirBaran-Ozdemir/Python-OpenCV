@@ -6,6 +6,7 @@ import cv2
 from OpencvPythonLessons.HTM import handTrackingModule as htm
 import numpy as np
 import time
+import os
 
 ######################
 wCam, hCam = 1280, 720
@@ -71,7 +72,13 @@ camera.set(3, wCam)
 camera.set(4, hCam)
 pTime = 0
 detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9)
-
+# Reading the images
+folderPath = "assets\\assetsDifficulty"
+myList = os.listdir(folderPath)
+overlayList = []
+for imgPath in myList:
+    img = cv2.imread(f"{folderPath}/{imgPath}")
+    overlayList.append(img)
 # Set difficulty variables
 while True:
     success, img = camera.read()
@@ -83,66 +90,58 @@ while True:
     img = cv2.flip(img, 1)
     if len(lmList) != 0:
         x1, y1 = lmList[8][1], lmList[8][2]
+        x2, y2 = lmList[12][1], lmList[12][2]
         x1 = wCam - x1
+        x2 = wCam - x2
         fingers = detector.fingersUp(img=img, draw=False)
         # Difficulty choose
         if chooseDifficulty == False:
-            # Little finger up == easy mode
+            img[0:60, int((wCam - 450) / 2) : int((wCam + 450) / 2)] = np.concatenate(
+                (overlayList[0], overlayList[1], overlayList[2]), axis=1
+            )
             if (
                 fingers[0]
-                and not fingers[1]
-                and not fingers[2]
-                and not fingers[3]
-                and fingers[4]
-            ):
-                difficulty = 1
-                (
-                    xSpeed,
-                    ySpeed,
-                    xSize,
-                    ySize,
-                    scoreAddition,
-                    playerSize,
-                ) = difficultySettings(difficulty)
-                chooseDifficulty = True
-
-            # Little and index finger up = medium mode
-            elif (
-                fingers[0]
                 and fingers[1]
-                and not fingers[2]
-                and not fingers[3]
-                and fingers[4]
-            ):
-                difficulty = 2
-                (
-                    xSpeed,
-                    ySpeed,
-                    xSize,
-                    ySize,
-                    scoreAddition,
-                    playerSize,
-                ) = difficultySettings(difficulty)
-                chooseDifficulty = True
-            # Little, ring and middle finger up = hard mode
-            elif (
-                fingers[0]
-                and not fingers[1]
                 and fingers[2]
                 and fingers[3]
-                and fingers[4]
+                and not fingers[4]
             ):
-                difficulty = 3
-                (
-                    xSpeed,
-                    ySpeed,
-                    xSize,
-                    ySize,
-                    scoreAddition,
-                    playerSize,
-                ) = difficultySettings(difficulty)
-                chooseDifficulty = True
-
+                # Easy mode
+                if x2 > int(wCam / 2 - 225) and x2 < int(wCam / 2 - 75) and y2 < 80:
+                    difficulty = 1
+                    (
+                        xSpeed,
+                        ySpeed,
+                        xSize,
+                        ySize,
+                        scoreAddition,
+                        playerSize,
+                    ) = difficultySettings(difficulty)
+                    chooseDifficulty = True
+                # Medium mode
+                elif x2 > int(wCam / 2 - 75) and x2 < int(wCam / 2 + 75) and y2 < 80:
+                    difficulty = 2
+                    (
+                        xSpeed,
+                        ySpeed,
+                        xSize,
+                        ySize,
+                        scoreAddition,
+                        playerSize,
+                    ) = difficultySettings(difficulty)
+                    chooseDifficulty = True
+                # Hard mode
+                elif x2 > int(wCam / 2 + 75) and x2 < int(wCam / 2 + 225) and y2 < 80:
+                    difficulty = 3
+                    (
+                        xSpeed,
+                        ySpeed,
+                        xSize,
+                        ySize,
+                        scoreAddition,
+                        playerSize,
+                    ) = difficultySettings(difficulty)
+                    chooseDifficulty = True
         # Game start if index finger up and all others down
         if (
             fingers[0]

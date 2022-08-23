@@ -158,7 +158,7 @@ def main():
     raund = 10
     ######################
     # Reading the images
-    folderPath = "assets\\assetsHandPoseChallenge"
+    folderPath = "assets\\assetsHandPoses"
     myList = os.listdir(folderPath)
     overlayList = []
     for imgPath in myList:
