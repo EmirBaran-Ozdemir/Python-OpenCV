@@ -5,9 +5,10 @@ import cv2
 import numpy as np
 import time
 import os
-from OpencvPythonLessons.HTM import handTrackingModule as htm
 from collections import deque
+import importlib
 
+htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
 # VARIABLES
 ######################
 wCam, hCam = 1280, 720

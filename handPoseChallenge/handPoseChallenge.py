@@ -4,9 +4,11 @@ sys.path.append("../")
 import cv2
 import numpy as np
 import os
-from OpencvPythonLessons.HTM import handTrackingModule as htm
 import time
 import random
+import importlib
+
+htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
 
 
 def choosePicture(overlayList):

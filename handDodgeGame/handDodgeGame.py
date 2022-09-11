@@ -3,11 +3,12 @@ import sys
 sys.path.append("../")
 
 import cv2
-from OpencvPythonLessons.HTM import handTrackingModule as htm
 import numpy as np
 import time
 import os
+import importlib
 
+htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
 ######################
 wCam, hCam = 1280, 720
 xr, yr = 0, 0

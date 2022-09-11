@@ -4,13 +4,14 @@ sys.path.append("../")
 import cv2
 import numpy as np
 import os
-from OpencvPythonLessons.HTM import handTrackingModule as htm
 import time
 import math
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+import importlib
 
+htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
 ######################
 wCam, hCam = 1080, 960
 pTime = 0
