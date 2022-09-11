@@ -125,9 +125,9 @@ def main():
     while True:
         succes, img = cap.read()
         img = detector.findHands(img)
-        self.lmList = detector.findPosition(img)
-        if len(self.lmList) != 0:
-            print(self.lmList[4])
+        detector.lmList = detector.findPosition(img)
+        if len(detector.lmList) != 0:
+            print(detector.lmList[0])
         # FRAME RATE
         cTime = time.time()
         fps = 1 / (cTime - pTime)
