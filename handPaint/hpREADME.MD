@@ -8,7 +8,7 @@ To change color you should open your index, middle and ring fingers and than you
 (also install main folder's requirements)
 ### INSTALLATION
 ```sh
-git clone https://github.com/EmirBaran-Ozdemir/OpenCVPython.git
+cd handPaint
 pip install -r requirements.txt
 python handPaint.py
 ```

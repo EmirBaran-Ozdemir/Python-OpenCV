@@ -7,7 +7,7 @@ To change volume you should close your little, ring and middle fingers. Than whe
 - ctypes -- *Default Python library*
 ### INSTALLATION
 ```sh
-git clone https://github.com/EmirBaran-Ozdemir/OpenCVPython.git
+cd handVolumeControl
 pip install -r requirements.txt
 python handVolumeControl.py
 ```
