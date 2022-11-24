@@ -44,7 +44,7 @@ def main():
     cTime = 0
     currLocationx, currLocationy = 0, 0
     prevLocationx, prevLocationy = 0, 0
-    SMOOTHNESS = 6
+    SMOOTHNESS = 6.5
     clicked = False
     # Getting 70 percent of height so hand won't be out
     WIDTH_RATIO = SCREEN_WIDTH / ((CAM_WIDTH - (CAM_WIDTH * 0.03)) * 0.35)
@@ -80,19 +80,20 @@ def main():
                 img=img, draw=False, circleRadius=10, circleColor=(0, 0, 0)
             )
             if fingers[1]:
+                # Adjusting pointer cam size to full screen size
+                # Setting middle as origin
+                move(
+                    (currLocationx - (CAM_WIDTH - (CAM_WIDTH * 0.03)) / 2)
+                    * WIDTH_RATIO,
+                    (currLocationy - (CAM_HEIGHT - (CAM_HEIGHT * 0.3)) / 2)
+                    * HEIGHT_RATIO,
+                )
+                prevLocationx, prevLocationy = currLocationx, currLocationy
                 if fingers[0] and not fingers[2] and not fingers[3] and not fingers[4]:
                     if clicked:
                         release(currLocationx, currLocationy)
                         clicked = False
-                    # Adjusting pointer cam size to full screen size
-                    # Setting middle as origin
-                    move(
-                        (currLocationx - (CAM_WIDTH - (CAM_WIDTH * 0.03)) / 2)
-                        * WIDTH_RATIO,
-                        (currLocationy - (CAM_HEIGHT - (CAM_HEIGHT * 0.3)) / 2)
-                        * HEIGHT_RATIO,
-                    )
-                    prevLocationx, prevLocationy = currLocationx, currLocationy
+
                 elif (
                     not fingers[0]
                     and not fingers[2]
