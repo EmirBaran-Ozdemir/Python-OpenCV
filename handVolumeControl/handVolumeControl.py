@@ -11,7 +11,7 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import importlib
 
-htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
+htm = importlib.import_module("HTM.handTrackingModule")
 ######################
 wCam, hCam = 1080, 960
 pTime = 0

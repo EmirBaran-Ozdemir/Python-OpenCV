@@ -7,8 +7,9 @@ import time
 import os
 from collections import deque
 import importlib
-
-htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
+currentFolder = os.getcwd()
+parentFolder = os.path.abspath(os.path.join(currentFolder, '..'))
+htm = importlib.import_module("HTM.handTrackingModule")
 # VARIABLES
 ######################
 wCam, hCam = 1280, 720
@@ -19,8 +20,9 @@ xp, yp = 0, 0
 pTime = 0
 cTime = 0
 ######################
+
 # PHOTO FOLDER
-folderPath = "assets\\assetsHandPaint"
+folderPath = f"{parentFolder}\\assets\\assetsHandPaint"
 myList = os.listdir(folderPath)
 overlayList = []
 for imgPath in myList:

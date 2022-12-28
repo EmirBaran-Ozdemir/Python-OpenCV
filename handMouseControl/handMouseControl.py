@@ -4,6 +4,7 @@ sys.path.append("../")
 import cv2
 import numpy as np
 import os
+
 import time
 import random
 import importlib
@@ -34,7 +35,7 @@ def release(x, y):
 
 
 def main():
-    htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
+    htm = importlib.import_module("HTM.handTrackingModule")
 
     ##############VARIABLES#######################
     CAM_WIDTH, CAM_HEIGHT = 1280, 720

@@ -7,8 +7,9 @@ import os
 import time
 import random
 import importlib
-
-htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
+currentFolder = os.getcwd()
+parentFolder = os.path.abspath(os.path.join(currentFolder, '..'))
+htm = importlib.import_module("HTM.handTrackingModule")
 
 
 def choosePicture(overlayList):
@@ -160,7 +161,7 @@ def main():
     raund = 10
     ######################
     # Reading the images
-    folderPath = "assets\\assetsHandPoses"
+    folderPath = f"{parentFolder}\\assets\\assetsHandPoses"
     myList = os.listdir(folderPath)
     overlayList = []
     for imgPath in myList:

@@ -7,8 +7,10 @@ import numpy as np
 import time
 import os
 import importlib
+currentFolder = os.getcwd()
+parentFolder = os.path.abspath(os.path.join(currentFolder, '..'))
+htm = importlib.import_module("HTM.handTrackingModule")
 
-htm = importlib.import_module("Python-OpenCV.HTM.handTrackingModule")
 ######################
 wCam, hCam = 1280, 720
 xr, yr = 0, 0
@@ -74,7 +76,7 @@ camera.set(4, hCam)
 pTime = 0
 detector = htm.handDetector(modelComplex=0, maxHands=1, detectionCon=0.9, trackCon=0.9)
 # Reading the images
-folderPath = "assets\\assetsDifficulty"
+folderPath = f"{parentFolder}\\assets\\assetsDifficulty"
 myList = os.listdir(folderPath)
 overlayList = []
 for imgPath in myList:
