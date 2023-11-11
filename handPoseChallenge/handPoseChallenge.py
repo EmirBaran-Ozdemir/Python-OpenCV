@@ -7,8 +7,9 @@ import os
 import time
 import random
 import importlib
+
 currentFolder = os.getcwd()
-parentFolder = os.path.abspath(os.path.join(currentFolder, '..'))
+parentFolder = os.path.abspath(os.path.join(currentFolder, ".."))
 htm = importlib.import_module("HTM.handTrackingModule")
 
 

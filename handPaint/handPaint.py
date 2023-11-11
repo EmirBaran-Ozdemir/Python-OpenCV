@@ -7,8 +7,9 @@ import time
 import os
 from collections import deque
 import importlib
+
 currentFolder = os.getcwd()
-parentFolder = os.path.abspath(os.path.join(currentFolder, '..'))
+parentFolder = os.path.abspath(os.path.join(currentFolder, ".."))
 htm = importlib.import_module("HTM.handTrackingModule")
 # VARIABLES
 ######################
@@ -45,7 +46,6 @@ while True:
     lmList, bbox = detector.findPosition(img, draw=False)
 
     if len(lmList) != 0:
-
         # FINGER INDEXES
         x1, y1 = lmList[8][1], lmList[8][2]
         x2, y2 = lmList[12][1], lmList[12][2]
@@ -80,7 +80,6 @@ while True:
                     imgCanvas, (x1, y1 + 30), (x2, y1 - 20), (0, 0, 0), cv2.FILLED
                 )
             elif fingers[1] and not fingers[2] and not fingers[3]:
-
                 if color == (255, 255, 0):  # BLUE
                     header = overlayList[0]
                 elif color == (0, 255, 0):  # GREEN
@@ -106,7 +105,15 @@ while True:
     imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
     _, imgInv = cv2.threshold(imgGray, 50, 255, cv2.THRESH_BINARY_INV)
     imgInv = cv2.cvtColor(imgInv, cv2.COLOR_GRAY2BGR)
+    # Calculate the dimensions of imgCanvas
+    canvasHeight, canvasWidth, _ = imgCanvas.shape
+
+    # Resize img to match the dimensions of imgCanvas
+    img = cv2.resize(img, (canvasWidth, canvasHeight))
+
+    # Perform the bitwise AND operation
     img = cv2.bitwise_and(img, imgInv)
+
     img = cv2.bitwise_or(img, imgCanvas)
     # FRAME RATE
     cTime = time.time()
